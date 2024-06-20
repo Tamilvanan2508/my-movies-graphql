@@ -19,7 +19,7 @@ export const authResolver = {
       }
 
       // Hash the password
-      const hashedPassword = await bcrypt.hash(password, String(SALT_ROUNDS));
+      const hashedPassword = await bcrypt.hash(password, Number(SALT_ROUNDS));
 
       // Create new user
       const user = await User.create({
