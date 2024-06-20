@@ -21,9 +21,18 @@ type AuthData {
   token: String!
 }
 
+type Movie {
+  id: ID!
+  title: String!
+  overview: String
+  release_date: String
+  poster_path: String
+}
+
 type RootQuery {
   login(email: String!, password: String!): AuthData!
   getUserById(userId: ID!): User
+  getMoviesList: [Movie]!
 }
 
 type RootMutation {
