@@ -2,11 +2,11 @@ import { buildSchema } from "graphql";
 
 const schema = buildSchema(`
 type Booking {
-    _id: ID!
-    event: Event!
-    user: User!
-    createdAt: String!
-    updatedAt: String!
+  _id: ID!
+  event: Event!
+  user: User!
+  createdAt: String!
+  updatedAt: String!
 }
 
 type Event {
@@ -44,21 +44,21 @@ input UserInput {
 }
 
 type RootQuery {
-    events: [Event!]!
-    bookings: [Booking!]!
-    login(email: String!, password: String!): AuthData!
+  events: [Event!]!
+  bookings: [Booking!]!
+  login(email: String!, password: String!): AuthData!
 }
 
 type RootMutation {
-    createEvent(eventInput: EventInput): Event
-    createUser(userInput: UserInput): User
-    bookEvent(eventId: ID!): Booking!
-    cancelBooking(bookingId: ID!): Event!
+  createEvent(eventInput: EventInput): Event
+  createUser(userInput: UserInput): User
+  bookEvent(eventId: ID!): Booking!
+  cancelBooking(bookingId: ID!): Event!
 }
 
 schema {
-    query: RootQuery
-    mutation: RootMutation
+  query: RootQuery
+  mutation: RootMutation
 }
 `);
 
