@@ -6,8 +6,8 @@ type User {
   userName: String!
   email: String!
   password: String
-  description: String!
-  profile: String!
+  description: String
+  profile: String
 }
 
 input UserInput {
@@ -23,6 +23,7 @@ type AuthData {
 
 type RootQuery {
   login(email: String!, password: String!): AuthData!
+  getUserById(userId: ID!): User
 }
 
 type RootMutation {
