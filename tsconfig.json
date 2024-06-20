@@ -4,15 +4,10 @@
     "module": "commonjs",
     "baseUrl": "./src",
     "paths": {
-      "@config/*": ["config/*"],
-      "@controllers/*": ["controllers/*"],
-      "@data/*": ["data/*"],
+      "@graphql/*": ["graphql/*"],
       "@middleware/*": ["middleware/*"],
       "@models/*": ["models/*"],
-      "@routes/*": ["routes/*"],
-      "@services/*": ["services/*"],
-      "@utils/*": ["utils/*"],
-      "@validators/*": ["validators/*"]
+      "@utils/*": ["utils/*"]
     },
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,

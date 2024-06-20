@@ -1,58 +1,27 @@
-import express from "express";
-import cors from "cors";
+import "module-alias/register";
+import express, { Express } from "express";
+import bodyParser from "body-parser";
 import { graphqlHTTP } from "express-graphql";
-import { makeExecutableSchema } from "@graphql-tools/schema";
+import graphQlSchema from "@graphql/schema";
+import graphQlResolvers from "@graphql/resolvers";
+import { connectDB } from "@utils/database";
+import { config } from "@utils/config";
 
-const app = express();
-const port = 4000;
+const app: Express = express();
 
-// In-memory data store
-const data = {
-  warriors: [
-    { id: "001", name: "Jaime" },
-    { id: "002", name: "Jorah" },
-  ],
-};
+app.use(bodyParser.json());
 
-// Schema
-const typeDefs = `
-type Warrior {
-  id: ID!
-  name: String!
-}
-
-type Query {
-  warriors: [Warrior]
-}
-`;
-
-// Resolver for warriors
-const resolvers = {
-  Query: {
-    warriors: (obj: any, args: any, context: { warriors: any }) =>
-      context.warriors,
-  },
-};
-
-const executableSchema = makeExecutableSchema({
-  typeDefs,
-  resolvers,
-});
-
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// Entrypoint
 app.use(
   "/graphql",
   graphqlHTTP({
-    schema: executableSchema,
-    context: data,
+    schema: graphQlSchema,
+    rootValue: graphQlResolvers,
     graphiql: true,
   })
 );
 
-app.listen(port, () => {
-  console.log(`Running a server at http://localhost:${port}`);
+connectDB().then(() => {
+  app.listen(config.port, () => {
+    console.log(`Server is running on port ${config.port}`);
+  });
 });
